@@ -25,18 +25,18 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/20201006:v1
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/20201006:v1
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/20201104:v1
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/20201104:v1
 
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}devops-20201006
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20201006:v1
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}devops-20201104
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20201104:v1
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             environment-variables: API_KEY=${{ secrets.API_KEY }}
-            name: '20201006'
+            name: '20201104'
             location: 'france central'
